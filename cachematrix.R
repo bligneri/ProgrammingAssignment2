@@ -55,6 +55,9 @@ cacheSolve <- function(x, ...) {
   i
 }
 
+
+makeTest<-function(){
+
 ## How to test :
 ## Create a 2x2 matrix
 test<-matrix(nrow=2,ncol=2)
@@ -63,47 +66,30 @@ test[1,2]=1
 test[2,1]=-2
 test[2,2]=2
 
-# Create a testMatrix
-testMatrix<-makeCacheMatrix(test)
-# Display the matrix
-testMatrix$get()
+message("This is our test matrix :")
+print(test)
 
-testMatrix$getinverse()
+message("We create a CacheMatrix")
+testMatrix<-makeCacheMatrix(test)
+
+message("Display the CacheMatrix")
+print(testMatrix$get())
+
+message("The inverse is not set :")
+print(testMatrix$getinverse())
 # NULL : Not set
 
+message("We call cacheSolve")
 cacheSolve(testMatrix)
-# Compute : no cache
 
+message("The inverse has been computed and is set")
+print(testMatrix$getinverse())
+
+
+message("We call cacheSolve again")
 cacheSolve(testMatrix)
-# Cached : no computation, only getinverse() is called
-
-makeVector <- function(x = numeric()) {
-  m <- NULL
-  set <- function(y) {
-    x <<- y
-    m <<- NULL
-  }
-  get <- function()
-    x
-  setmean <- function(mean)
-    m <<- mean
-  getmean <- function()
-    m
-  list(
-    set = set, get = get,
-    setmean = setmean,
-    getmean = getmean
-  )
-}
-
-cachemean <- function(x, ...) {
-  m <- x$getmean()
-  if (!is.null(m)) {
-    message("getting cached data")
-    return(m)
-  }
-  data <- x$get()
-  m <- mean(data, ...)
-  x$setmean(m)
-  m
+message("Inverse was cached : no computation, only getinverse() is called")
+message("The inverse is the same as precedently")
+print(testMatrix$getinverse())
+        
 }
