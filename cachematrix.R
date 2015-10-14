@@ -3,8 +3,9 @@
 
 ## This function create a special "Matrix", which is a list containing a function to
 ## 1. set the value of the matrix
-## 2. returne the value of the matrix
-## 3. 
+## 2. return the value of the matrix
+## 3. set the inverse of the matrix
+## 4. return the inverse of the matrix
 
 makeCacheMatrix <- function(x = matrix()) {
 	inverse <- NULL
@@ -31,7 +32,10 @@ makeCacheMatrix <- function(x = matrix()) {
 
 ## This function look for the cache of the already inversed matrix
 ### If found : return the cache (already calculated inverse with solve or set with setinverse)
-### If not found : compute the inverse, cache the inverse and return the inverse
+### If not found : 
+#### compute the inverse using solve()
+#### cache the inverse (using setinverse())
+#### return the inverse 
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
@@ -46,6 +50,7 @@ cacheSolve <- function(x, ...) {
         i
 }
 
+## How to test :
 
 
 makeVector <- function(x = numeric()) {
